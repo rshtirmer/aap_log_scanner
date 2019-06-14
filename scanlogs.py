@@ -55,15 +55,14 @@ class logParser:
             self.e6sn = remove_duplicates(self.updateE6())
             #print(len(self.e6sn))
             print("**************************")
-            print("***** Event 6 Stores *****")
+            print("{} Event 6 Stores").format(len(self.e6sn))
             print("**************************\n")
             self.proccessedLogs += self.proccessLog(self.e6sn)
 
         if(self.args.event is None or self.args.event.lower() == "e7"):
             self.e7sn = remove_duplicates(self.getStoreNumbers(self.filteredLogs, self.patterns[1]))
-            #print(len(self.e7sn))
             print("**************************")
-            print("***** Event 7 Stores *****")
+            print("{} Event 7 Stores").format(len(self.e7sn))
             print("**************************\n")
             self.proccessedLogs += self.proccessLog(self.e7sn)
 
