@@ -3,9 +3,10 @@
 
 # Usage
 ```
-usage: scanlogs.py [-h] [--startdate [STARTDATE]] [--enddate [ENDDATE]]
-                   [--file [FILE]] [--ap [AP]] [--event [EVENT]] [--saltcall]
-                   [--force]
+usage: t128_app_logscanner.py [-h] [--startdate [STARTDATE]]
+                              [--enddate [ENDDATE]] [--file [FILE]]
+                              [--ap [AP]] [--event [EVENT]] [--saltcall]
+                              [--force]
 
 optional arguments:
   -h, --help            show this help message and exit
