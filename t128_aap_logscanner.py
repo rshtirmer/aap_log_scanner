@@ -128,7 +128,7 @@ class logParser:
                     print(data)
                     contents.append(procData)
             except:
-                print("ERROR on StoreNumber: " + str(num))
+                print("\nERROR on StoreNumber: " + str(num))
         return contents
 
     def apiCall(self, storeNumber):
