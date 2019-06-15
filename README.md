@@ -1,5 +1,5 @@
 # aap_log_scanner
-128Technologies script for handling log files in python. 
+128Technology script for handling log files in python. 
 
 # Usage
 ```
