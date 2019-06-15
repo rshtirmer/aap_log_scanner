@@ -35,7 +35,6 @@ def sortByDate(log):
     ordered_data = sorted(log.items(), key = lambda x:datetime.strptime(x[1], '%Y-%m-%d'), reverse=False)
     return ordered_data
 
-
 def apiCall(storeNumber):
     host = "https://aap.attucs.com/api.php?uname=128t&storeNumber="
     host = host + str(storeNumber)
@@ -132,7 +131,6 @@ def proccessLog(log, ap):
                 previousDate = date
 
             print("Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
-
     return dataLog
 
 def saltCall(procLog, force):
