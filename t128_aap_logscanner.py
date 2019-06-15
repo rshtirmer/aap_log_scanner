@@ -130,7 +130,11 @@ def proccessLog(log, ap):
                 print("{}: \n").format(date)
                 previousDate = date
 
+            #AAPCA0719P1
+            routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
+            print(routerName)
             print("Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+
     return dataLog
 
 def saltCall(procLog, force):
@@ -152,9 +156,12 @@ def buildOutput(args, e6, e7):
     outputLog = []
 
     if(args.getstore is not None):
-        data = apiCall(args.getstore)
-        procData = json.loads(data)
-        print("\nStore Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+        try:
+            data = apiCall(args.getstore)
+            procData = json.loads(data)
+            print("\nStore Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+        except Exception as e:
+            print("\nFailed to get StoreNumber!\nError: \n\t{}\n").format(e)
 
     if(not args.e6):
         print("*"*20)
