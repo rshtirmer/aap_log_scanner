@@ -41,6 +41,7 @@ def apiCall(storeNumber):
     try:
         r = requests.get(url = host)
         data = r.json()
+        data = json.loads(data)
         return data
     except:
         "ERROR Making API Call"
@@ -120,8 +121,7 @@ def proccessLog(log, ap):
         storeNumber = pair[0]
         date = pair[1]
 
-        data = apiCall(storeNumber)
-        procData = json.loads(data)
+        procData = apiCall(storeNumber)
 
         if (ap is None or ap.lower() in procData['AccessProvider'].lower()):
             dataLog.append(procData)
@@ -129,11 +129,12 @@ def proccessLog(log, ap):
             if(date != previousDate):
                 print("{}: \n").format(date)
                 previousDate = date
-
-            #AAPCA0719P1
-            routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
-            print(routerName)
-            print("Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+                
+            try:
+                routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
+                print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+            except:
+                pass
 
     return dataLog
 
@@ -157,8 +158,7 @@ def buildOutput(args, e6, e7):
 
     if(args.getstore is not None):
         try:
-            data = apiCall(args.getstore)
-            procData = json.loads(data)
+            procData = apiCall(args.getstore)
             print("\nStore Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
         except Exception as e:
             print("\nFailed to get StoreNumber!\nError: \n\t{}\n").format(e)
