@@ -16,6 +16,8 @@ def parseArgs():
     parser.add_argument('--e7', action='store_true', help="Set this flag to filter by E7 stores.")
     parser.add_argument('--getstore', nargs='?', type=str, help="Prove a StoreNumber to retrieve.")
     args = parser.parse_args()
+    if(args.getstore is not None):
+        print("Getting Store Number: {}").format(args.getstore)
     return args
 
 files = ["t128_aap.1.log", "t128_aap.log"]
@@ -157,7 +159,9 @@ def buildOutput(args, e6, e7):
     if(args.getstore is not None):
         try:
             procData = apiCall(args.getstore)
-            print("\nStore Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+            routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
+            print("\nRouter: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+            return
         except Exception as e:
             print("\nFailed to get StoreNumber!\nError: \n\t{}\n").format(e)
 
