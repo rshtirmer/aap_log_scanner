@@ -122,20 +122,18 @@ def proccessLog(log, ap):
         date = pair[1]
 
         procData = apiCall(storeNumber)
+        try:
+            if (ap is None or ap.lower() in procData['AccessProvider'].lower()):
+                dataLog.append(procData)
 
-        if (ap is None or ap.lower() in procData['AccessProvider'].lower()):
-            dataLog.append(procData)
+                if(date != previousDate):
+                    print("{}: \n").format(date)
+                    previousDate = date
 
-            if(date != previousDate):
-                print("{}: \n").format(date)
-                previousDate = date
-
-            try:
-                routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
-                print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
-            except:
-                pass
-
+                    routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
+                    print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+        except:
+            pass
     return dataLog
 
 def saltCall(procLog, force):
@@ -193,10 +191,7 @@ def main():
     e7FilteredSN = sortByDate(getAllStoreNumbersByDate(e7FilteredLog))
 
     e6FilteredSN = sortByDate(updateE6(e6FilteredSN, e7FullSN))
-    try:
-        buildOutput(args, e6FilteredSN, e7FilteredSN)
-    except:
-        print(e)
+    buildOutput(args, e6FilteredSN, e7FilteredSN)
 
 if __name__== "__main__":
   main()
