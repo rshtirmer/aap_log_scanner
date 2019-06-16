@@ -129,7 +129,7 @@ def proccessLog(log, ap):
             if(date != previousDate):
                 print("{}: \n").format(date)
                 previousDate = date
-                
+
             try:
                 routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
                 print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
@@ -193,8 +193,10 @@ def main():
     e7FilteredSN = sortByDate(getAllStoreNumbersByDate(e7FilteredLog))
 
     e6FilteredSN = sortByDate(updateE6(e6FilteredSN, e7FullSN))
-
-    buildOutput(args, e6FilteredSN, e7FilteredSN)
-
+    try:
+        buildOutput(args, e6FilteredSN, e7FilteredSN)
+    except:
+        pass
+        
 if __name__== "__main__":
   main()
