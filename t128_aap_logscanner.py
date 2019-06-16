@@ -132,8 +132,8 @@ def proccessLog(log, ap):
                     print("{}: \n").format(date)
                     previousDate = date
 
-                    routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
-                    print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
+                routerName = "AAP" + str(procData['State']) + str(procData['StoreNumber']) + "P" + str(procData['Pod'])
+                print("Router: {}\n\t Store Number: {}\n\t Access Provider: {}\n\t Pod: {}\n\t State: {}\n\t LannerSN-A: {}\n\t LannerSN-B: {}\n").format(routerName, procData['StoreNumber'], procData['AccessProvider'], procData['Pod'], procData['State'], procData['LannerSN-A'], procData['LannerSN-B'])
         except:
             pass
     return dataLog
