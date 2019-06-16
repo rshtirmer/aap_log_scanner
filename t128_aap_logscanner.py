@@ -196,7 +196,7 @@ def main():
     try:
         buildOutput(args, e6FilteredSN, e7FilteredSN)
     except:
-        pass
-        
+        print(e)
+
 if __name__== "__main__":
   main()
