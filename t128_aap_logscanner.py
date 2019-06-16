@@ -161,13 +161,13 @@ def buildOutput(args, e6, e7):
         except Exception as e:
             print("\nFailed to get StoreNumber!\nError: \n\t{}\n").format(e)
 
-    if(not args.e6):
+    if(not args.e7):
         print("*"*20)
         print("{} Total E6 Stores").format(len(e6))
         print("*"*20 + "\n")
         outputLog += proccessLog(e6, args.ap)
 
-    if(not args.e7):
+    if(not args.e6):
         print("*"*20)
         print("{} Total E7 Stores").format(len(e7))
         print("*"*20 + "\n")
